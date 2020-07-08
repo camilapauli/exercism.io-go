@@ -52,7 +52,7 @@ func (il IntList) Map(fn unaryFunc) IntList {
 }
 
 //Filter ...
-func (il IntList) Filter(fn predFunc) []int {
+func (il IntList) Filter(fn predFunc) IntList {
 	newList := make(IntList, 0, len(il))
 	for _, item := range il {
 		if fn(item) {
