@@ -1,7 +1,5 @@
 package listops
 
-import "fmt"
-
 //IntList ...
 type IntList []int
 

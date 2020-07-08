@@ -124,8 +124,7 @@ func TestFilterMethod(t *testing.T) {
 	for _, tt := range filterTestCases {
 		in := IntList(tt.list)
 		got := in.Filter(tt.fn)
-		if !reflect.DeepEqual(IntList(tt.want), got) {
-			// t.Fatalf("FAIL: %d: %d %d %d", len(tt.want), cap(tt.want), len(got), cap(got))
+		if !reflect.DeepEqual(tt.want, got) {
 			t.Fatalf("FAIL: %s: %q -- expected: %v, actual: %v", tt.property, tt.name, tt.want, got)
 		} else {
 			t.Logf("PASS: %s: %s", tt.property, tt.name)
