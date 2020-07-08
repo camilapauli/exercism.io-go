@@ -55,26 +55,19 @@ func (il IntList) Map(fn unaryFunc) IntList {
 
 //Filter ...
 func (il IntList) Filter(fn predFunc) []int {
-	newList := make([]int, 0)
+	newList := make(IntList, 0, len(il))
 	for _, item := range il {
-		if fn(item) == true {
+		if fn(item) {
 			newList = append(newList, item)
-			// fmt.Printf("len=%d cap=%d %v\n", len(newList), cap(newList), newList)
 		}
 	}
-	resultList := make(IntList, 0, len(newList))
-	resultList = newList
-	fmt.Printf("len=%d cap=%d %v\n", len(resultList), cap(resultList), resultList)
 	return newList
 }
 
 //Foldr ...
 func (il IntList) Foldr(fn binFunc, initial int) int {
-	for _, item := range il {
-		if initial == 0 {
-			break
-		}
-		initial = fn(item, initial)
+	for i := len(il) - 1; i >= 0; i-- {
+		initial = fn(il[i], initial)
 	}
 	return initial
 }
