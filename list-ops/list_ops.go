@@ -1,18 +1,21 @@
 package listops
 
-//IntList ...
+//IntList is a custom type used in the methods
 type IntList []int
+
+//CaList is a custom type over an existing custom type
+type CaList IntList
 
 type unaryFunc func(x int) int
 type predFunc func(n int) bool
 type binFunc func(x, y int) int
 
-//Length ...
+//Length returns the length of a int list
 func (il IntList) Length() int {
 	return len(il)
 }
 
-//Reverse ...
+//Reverse returns the reverse list from a previews int list
 func (il IntList) Reverse() IntList {
 	newList := IntList{}
 	lenght := len(il)
@@ -24,7 +27,7 @@ func (il IntList) Reverse() IntList {
 	return newList
 }
 
-//Append ...
+//Append items from a list in the constructor list
 func (il IntList) Append(originalList IntList) IntList {
 	for _, item := range originalList {
 		il = append(il, item)
@@ -32,7 +35,7 @@ func (il IntList) Append(originalList IntList) IntList {
 	return il
 }
 
-//Concat ...
+//Concat items from a list of lists in the constructor list
 func (il IntList) Concat(list []IntList) IntList {
 	for _, items := range list {
 		for _, item := range items {
@@ -42,7 +45,7 @@ func (il IntList) Concat(list []IntList) IntList {
 	return il
 }
 
-//Map ...
+//Map returns a new list with an function applied in items from the constructor list
 func (il IntList) Map(fn unaryFunc) IntList {
 	newList := IntList{}
 	for _, item := range il {
@@ -51,7 +54,7 @@ func (il IntList) Map(fn unaryFunc) IntList {
 	return newList
 }
 
-//Filter ...
+//Filter returns a new list with an function applied in items from the constructor lists where the function applied is true
 func (il IntList) Filter(fn predFunc) IntList {
 	newList := make(IntList, 0, len(il))
 	for _, item := range il {
@@ -62,7 +65,7 @@ func (il IntList) Filter(fn predFunc) IntList {
 	return newList
 }
 
-//Foldr ...
+//Foldr reduces each item from the right side of a list using an acumulator
 func (il IntList) Foldr(fn binFunc, initial int) int {
 	for i := len(il) - 1; i >= 0; i-- {
 		initial = fn(il[i], initial)
@@ -70,7 +73,7 @@ func (il IntList) Foldr(fn binFunc, initial int) int {
 	return initial
 }
 
-//Foldl ...
+//Foldl reduces each item from the left side of a list using an acumulator
 func (il IntList) Foldl(fn binFunc, initial int) int {
 	for _, item := range il {
 		initial = fn(initial, item)
