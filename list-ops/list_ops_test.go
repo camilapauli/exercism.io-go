@@ -1,6 +1,7 @@
 package listops
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 )
@@ -97,6 +98,24 @@ func TestFold(t *testing.T) {
 
 }
 
+func ExampleFoldl() {
+	testCase := foldTestCases[2]
+	list := testCase.list
+	fn := testCase.fn
+	initial := testCase.initial
+	fmt.Println(list.Foldl(fn, initial))
+	// Output: -10
+}
+
+func ExampleFoldr() {
+	testCase := foldTestCases[6]
+	list := testCase.list
+	fn := testCase.fn
+	initial := testCase.initial
+	fmt.Println(list.Foldr(fn, initial))
+	// Output: -94
+}
+
 var filterTestCases = []struct {
 	name     string
 	property string
@@ -133,6 +152,14 @@ func TestFilterMethod(t *testing.T) {
 	}
 }
 
+func ExampleFilter() {
+	testCase := filterTestCases[1]
+	list := IntList(testCase.list)
+	fn := testCase.fn
+	fmt.Println(list.Filter(fn))
+	// Output: [1 3 5]
+}
+
 var lengthTestCases = []struct {
 	name     string
 	property string
@@ -163,6 +190,13 @@ func TestLengthMethod(t *testing.T) {
 		}
 
 	}
+}
+
+func ExampleLength() {
+	testCase := lengthTestCases[1]
+	list := testCase.list
+	fmt.Println(list.Length())
+	// Output: 4
 }
 
 var mapTestCases = []struct {
@@ -200,6 +234,14 @@ func TestMapMethod(t *testing.T) {
 	}
 }
 
+func ExampleMap() {
+	testCase := mapTestCases[1]
+	list := IntList(testCase.list)
+	fn := testCase.fn
+	fmt.Println(list.Map(fn))
+	// Output: [2 4 6 8]
+}
+
 var reverseTestCases = []struct {
 	name     string
 	property string
@@ -230,6 +272,13 @@ func TestReverseMethod(t *testing.T) {
 		}
 
 	}
+}
+
+func ExampleReverse() {
+	testCase := reverseTestCases[1]
+	list := IntList(testCase.list)
+	fmt.Println(list.Reverse())
+	// Output: [7 5 3 1]
 }
 
 var appendTestCases = []struct {
@@ -274,6 +323,14 @@ func TestAppendMethod(t *testing.T) {
 	}
 }
 
+func ExampleAppend() {
+	testCase := appendTestCases[2]
+	list := IntList(testCase.list)
+	appendList := testCase.appendThis
+	fmt.Println(list.Append(appendList))
+	// Output: [1 2 2 3 4 5]
+}
+
 var concatTestCases = []struct {
 	name     string
 	property string
@@ -306,4 +363,12 @@ func TestConcatMethod(t *testing.T) {
 			t.Logf("PASS: %s: %s", tt.property, tt.name)
 		}
 	}
+}
+
+func ExampleConcat() {
+	testCase := concatTestCases[1]
+	list := IntList(testCase.list)
+	args := testCase.args
+	fmt.Println(list.Concat(args))
+	// Output: [1 2 3 4 5 6]
 }

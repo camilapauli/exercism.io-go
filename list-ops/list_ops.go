@@ -3,9 +3,6 @@ package listops
 //IntList is a custom type used in the methods
 type IntList []int
 
-//CaList is a custom type over an existing custom type
-type CaList IntList
-
 type unaryFunc func(x int) int
 type predFunc func(n int) bool
 type binFunc func(x, y int) int
